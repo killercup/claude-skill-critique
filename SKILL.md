@@ -74,6 +74,8 @@ What's wrong and why it matters. 2-3 sentences.
 e.g., "User runs --force-art, Path('cover.png') resolves against CWD
 instead of the album directory, upload fails with 'file not found'."
 
+Sources: src/foo.rs:46-100 src/foo/tests.rs:12-15
+
 [Inconsistency] [N] Another title
 
 Description here. 2-3 sentences.
