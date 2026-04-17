@@ -62,18 +62,23 @@ Start with a one-line summary:
 
 **N findings: X showstoppers, Y gaps, Z inconsistencies, W underspecified, V suggestions.**
 
-Then list findings by category. Use this plain-text format (no blockquotes — they render poorly in terminals):
+Then list findings by category, with unique numbers so the user can reference them.
+Use this markdown format (no blockquotes — they render poorly in terminals):
 
 ```
-[Gap] Title here
-What's wrong and why it matters. 2-3 sentences.
-Scenario: A concrete situation where this causes a real problem.
-  e.g., "User runs --force-art, Path('cover.png') resolves against CWD
-  instead of the album directory, upload fails with 'file not found'."
+[Gap] [N] Title here
 
-[Inconsistency] Another title
+What's wrong and why it matters. 2-3 sentences.
+
+**Scenario:** A concrete situation where this causes a real problem.
+e.g., "User runs --force-art, Path('cover.png') resolves against CWD
+instead of the album directory, upload fails with 'file not found'."
+
+[Inconsistency] [N] Another title
+
 Description here. 2-3 sentences.
-Scenario: ...
+
+**Scenario:** ...
 ```
 
 For each finding, include a concrete scenario showing when/how this causes a
