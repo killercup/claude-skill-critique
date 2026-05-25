@@ -2,8 +2,6 @@
 name: critique
 description: Adversarial review of a plan, design doc, code, or project — like a lawyer reviewing a contract on the user's behalf. Use when the user wants a skeptical second opinion before committing to an approach.
 context: fork
-agent: general-purpose
-model: opus
 disable-model-invocation: true
 allowed-tools: Read, Grep, Glob, Bash, WebFetch, WebSearch
 ---
@@ -65,15 +63,28 @@ Briefly note what's solid. This calibrates trust — if you can identify what's 
 
 ## Output format
 
-Start with a one-line summary:
+Start with a one-line summary.
+Then list findings by category, with unique numbers so the user can reference them.
+
+For each finding, include a concrete scenario showing when/how this causes a problem.
+Good scenarios name specific files, inputs, or sequences of actions.
+If a finding is important but doesn't have a natural scenario
+(e.g., readability, library choice, naming),
+state the observation directly instead of forcing a scenario.
+Don't use blockquotes.
+
+End with the "What looks good" section as a simple bulleted list.
+
+Here's a example:
+
+```md
+# Review: Insert summary of what was reviewed
 
 **N findings: X showstoppers, Y gaps, Z inconsistencies, W underspecified, V suggestions.**
 
-Then list findings by category, with unique numbers so the user can reference them.
-Use this markdown format (no blockquotes — they render poorly in terminals):
+## Gaps
 
-```
-[Gap] [N] Title here
+### [Gap] [N] Title here
 
 What's wrong and why it matters. 2-3 sentences.
 
@@ -82,7 +93,9 @@ e.g., "User runs --force-art, Path('cover.png') resolves against CWD instead of 
 
 Sources: src/foo.rs:46-100 src/foo/tests.rs:12-15
 
-[Inconsistency] [N] Another title
+## Inconsistencies
+
+### [Inconsistency] [N] Another title
 
 Description here. 2-3 sentences.
 
@@ -90,11 +103,3 @@ Description here. 2-3 sentences.
 
 Sources: ...
 ```
-
-For each finding, include a concrete scenario showing when/how this causes a problem.
-Good scenarios name specific files, inputs, or sequences of actions.
-If a finding is important but doesn't have a natural scenario
-(e.g., readability, library choice, naming),
-state the observation directly instead of forcing a scenario.
-
-End with the "What looks good" section as a simple bulleted list.
